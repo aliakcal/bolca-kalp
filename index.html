@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Наш первый вечер ✨</title>
+  <meta name="description" content="Особенные моменты той незабываемой первой ночи, которую мы провели вместе." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0608;
+      --bg2: #110d10;
+      --pink: #e8738a;
+      --rose: #c95b72;
+      --gold: #d4a853;
+      --light: #f5e6ea;
+      --muted: #8a7580;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--light);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── PARTICLES ── */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: floatUp var(--dur) ease-in infinite;
+      animation-delay: var(--delay);
+    }
+    @keyframes floatUp {
+      0%   { opacity: 0;   transform: translateY(100vh) scale(0.4); }
+      20%  { opacity: 0.6; }
+      80%  { opacity: 0.3; }
+      100% { opacity: 0;   transform: translateY(-10vh) scale(1.2); }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      z-index: 1;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 60%, rgba(232,115,138,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .date-badge {
+      display: inline-block;
+      border: 1px solid rgba(232,115,138,0.3);
+      color: var(--pink);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.2rem;
+      border-radius: 99px;
+      margin-bottom: 1.6rem;
+      backdrop-filter: blur(8px);
+      background: rgba(232,115,138,0.06);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      line-height: 1.1;
+      background: linear-gradient(135deg, #f5e6ea 30%, var(--pink) 70%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .scroll-hint {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .scroll-hint span { font-size: 1.2rem; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* ── INTRO STRIP ── */
+    #intro {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+    .intro-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+      margin: 0 auto 2rem;
+    }
+    .intro-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--light);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .intro-heart {
+      display: block;
+      margin-top: 1.5rem;
+      font-size: 2rem;
+      animation: heartbeat 1.4s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.25); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.15); }
+      70%       { transform: scale(1); }
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      position: relative;
+      z-index: 1;
+      padding: 2rem 1.5rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-label h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      background: linear-gradient(135deg, var(--light), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-label p {
+      color: var(--muted);
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Masonry-style grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 700px) {
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      .photo-grid { grid-template-columns: 1fr; }
+    }
+
+    .photo-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.6s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(232,115,138,0.12);
+    }
+    .photo-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .photo-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(232,115,138,0.25);
+      border-color: rgba(232,115,138,0.4);
+    }
+
+    /* Make certain cards taller for visual interest */
+    .photo-card:nth-child(1) { grid-row: span 2; }
+    .photo-card:nth-child(4) { grid-row: span 2; }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      min-height: 220px;
+      transition: transform 0.6s ease, filter 0.4s ease;
+      filter: brightness(0.92) saturate(1.05);
+    }
+    .photo-card:hover img {
+      transform: scale(1.06);
+      filter: brightness(1) saturate(1.2);
+    }
+
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(10,6,8,0.65) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .photo-card:hover .photo-overlay { opacity: 1; }
+
+    .photo-overlay-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--light);
+      font-size: 0.9rem;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 1rem;
+    }
+    #lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 88vh;
+      border-radius: 16px;
+      box-shadow: 0 0 80px rgba(232,115,138,0.3);
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      object-fit: contain;
+    }
+    #lightbox.open img { transform: scale(1); }
+
+    .lb-close {
+      position: absolute;
+      top: 1.2rem; right: 1.5rem;
+      background: rgba(232,115,138,0.15);
+      border: 1px solid rgba(232,115,138,0.3);
+      color: var(--light);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease;
+    }
+    .lb-close:hover { background: rgba(232,115,138,0.35); }
+
+    .lb-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(232,115,138,0.15);
+      border: 1px solid rgba(232,115,138,0.25);
+      color: var(--light);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lb-nav:hover { background: rgba(232,115,138,0.35); }
+    #lb-prev { left: 1rem; }
+    #lb-next { right: 1rem; }
+
+    /* ── FOOTER ── */
+    #footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 4rem 2rem;
+      border-top: 1px solid rgba(232,115,138,0.1);
+    }
+    .footer-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.8;
+    }
+    .footer-date {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--pink);
+      text-transform: uppercase;
+    }
+
+    /* ── FLOATING HEARTS ── */
+    .float-heart {
+      position: fixed;
+      font-size: 1.2rem;
+      pointer-events: none;
+      z-index: 200;
+      animation: riseHeart 2s ease-out forwards;
+    }
+    @keyframes riseHeart {
+      0%   { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-120px) scale(0.4); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BACKGROUND PARTICLES -->
+<div id="particles"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="date-badge">31 Мая 2026 · Наши первые фото</div>
+  <h1 class="hero-title">Наше начало</h1>
+  <p class="hero-sub">У каждой большой истории есть своя первая ночь.<br>Вот наша&hellip;</p>
+  <div class="scroll-hint">
+    <span>↓</span>
+    листай
+  </div>
+</section>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="intro-line"></div>
+  <p class="intro-text">
+    «Некоторые моменты врезаются в память<br>ещё до того, как их снимут на фото.»
+    <span class="intro-heart">🌹</span>
+  </p>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-label">
+    <h2>Та ночь</h2>
+    <p>в парке · под звёздами · только мы</p>
+  </div>
+
+  <div class="photo-grid" id="photoGrid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <p class="footer-quote">«Если два человека смотрят на одну звезду одновременно, расстояние между ними на самом деле не существует.»</p>
+  <p class="footer-date">31.05.2026 ✦ О той первой ночи</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button class="lb-close" id="lb-close" aria-label="Kapat">✕</button>
+  <button class="lb-nav" id="lb-prev" aria-label="Önceki">‹</button>
+  <img id="lb-img" src="" alt="Fotoğraf" />
+  <button class="lb-nav" id="lb-next" aria-label="Sonraki">›</button>
+</div>
+
+<script>
+  // ── PHOTOS ──
+  const photos = [
+    {
+      src: "WhatsApp Image 2026-06-02 at 23.13.25.jpeg",
+      caption: "Первый поцелуй 🌙"
+    },
+    {
+      src: "WhatsApp Image 2026-06-02 at 23.13.25 (1).jpeg",
+      caption: "Безумные и счастливые 💫"
+    },
+    {
+      src: "WhatsApp Image 2026-06-02 at 23.13.25 (2).jpeg",
+      caption: "Тот спокойный момент ✨"
+    },
+    {
+      src: "WhatsApp Image 2026-06-02 at 23.13.25 (3).jpeg",
+      caption: "Оба улыбаемся 🌿"
+    },
+    {
+      src: "WhatsApp Image 2026-06-02 at 23.13.25 (4).jpeg",
+      caption: "Знак мира 🤙"
+    },
+    {
+      src: "WhatsApp Image 2026-06-02 at 23.13.25 (5).jpeg",
+      caption: "Под огнями парка 🌃"
+    },
+    {
+      src: "WhatsApp Image 2026-06-02 at 23.13.25 (6).jpeg",
+      caption: "Если бы эта ночь никогда не кончалась… 💭"
+    }
+  ];
+
+  // ── BUILD PARTICLES ──
+  const particleContainer = document.getElementById('particles');
+  const colors = ['#e8738a','#c95b72','#d4a853','#f5e6ea','#ff9eb5'];
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 5 + 2;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      --dur:${Math.random()*10+8}s;
+      --delay:${Math.random()*10}s;
+    `;
+    particleContainer.appendChild(p);
+  }
+
+  // ── BUILD GRID ──
+  const grid = document.getElementById('photoGrid');
+  photos.forEach((ph, i) => {
+    const card = document.createElement('div');
+    card.className = 'photo-card';
+    card.dataset.index = i;
+    card.innerHTML = `
+      <img src="${ph.src}" alt="${ph.caption}" loading="lazy" />
+      <div class="photo-overlay">
+        <span class="photo-overlay-text">${ph.caption}</span>
+      </div>
+    `;
+    card.addEventListener('click', () => openLightbox(i));
+    grid.appendChild(card);
+  });
+
+  // ── INTERSECTION OBSERVER (scroll reveal) ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.photo-card').forEach((c, i) => {
+    c.style.transitionDelay = `${i * 0.08}s`;
+    observer.observe(c);
+  });
+
+  // ── LIGHTBOX ──
+  let currentIndex = 0;
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+
+  function openLightbox(i) {
+    currentIndex = i;
+    lbImg.src = photos[i].src;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function prevPhoto() {
+    currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+    lbImg.style.opacity = 0;
+    setTimeout(() => { lbImg.src = photos[currentIndex].src; lbImg.style.opacity = 1; }, 150);
+  }
+  function nextPhoto() {
+    currentIndex = (currentIndex + 1) % photos.length;
+    lbImg.style.opacity = 0;
+    setTimeout(() => { lbImg.src = photos[currentIndex].src; lbImg.style.opacity = 1; }, 150);
+  }
+
+  lbImg.style.transition = 'opacity 0.15s ease';
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', prevPhoto);
+  document.getElementById('lb-next').addEventListener('click', nextPhoto);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') prevPhoto();
+    if (e.key === 'ArrowRight') nextPhoto();
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // ── FLOATING HEARTS on click ──
+  document.addEventListener('click', e => {
+    if (e.target.closest('#lightbox') && e.target.tagName !== 'BUTTON') return;
+    const hearts = ['🩷','❤️','✨','🌹','💫','💕'];
+    const h = document.createElement('div');
+    h.className = 'float-heart';
+    h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+    h.style.left = (e.clientX - 12) + 'px';
+    h.style.top  = (e.clientY - 12) + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 2100);
+  });
+</script>
+</body>
+</html>
